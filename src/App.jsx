@@ -7,27 +7,27 @@ import Footer from "./components/Footer";
 import MobileNagivation from "./components/MobileNagivation";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { setBannerData } from "./store/movieslice";
+// import { setBannerData } from "./store/movieslice";
 
 
 function App() {
 
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
 
-  const fetchTrendingData = async () => {
-    try {
-      const response = await axios.get("/trending/all/week");
-      dispatch(setBannerData)
-      console.log("respose", response);
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
+  // const fetchTrendingData = async () => {
+  //   try {
+  //     const response = await axios.get("/trending/all/week");
+  //     // dispatch(setBannerData)
+  //     console.log("respose", response);
+  //   } catch (error) {
+  //     console.log("error", error);
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchTrendingData();
-  }, []);
+  // useEffect(() => {
+  //   fetchTrendingData();
+  // }, []);
 
   return (
     <>
