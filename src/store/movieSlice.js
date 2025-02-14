@@ -1,19 +1,23 @@
-// import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-// const initialState = {
-//   bannerData: [],
-// };
+const initialState = {
+  bannerData: [],
+  imageURL: "",
+};
 
-// export const movieSlice = createSlice({
-//   name: "movie",
-//   initialState,
-//   reducers: {
-//     setBannerData: (state, action) => {
-//       state.bannerData = action.payload;
-//     },
-//   },
-// });
+export const movieSlice = createSlice({
+  name: "movie",
+  initialState,
+  reducers: {
+    setBannerData: (state, action) => {
+      state.bannerData = action.payload;
+    },
+    setImageURL: (state, action) => {
+      state.imageURL = action.payload;
+    },
+  },
+});
 
-// export const { setBannerData } = movieSlice.actions;
+export const { setBannerData, setImageURL } = movieSlice.actions;
 
-// export default movieSlice.reducer;
+export default movieSlice.reducer; // Export the reducer here

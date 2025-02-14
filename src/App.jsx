@@ -1,39 +1,48 @@
-import { useEffect, useState } from "react";
-
-// import './App.css'
+import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import MobileNagivation from "./components/MobileNagivation";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-// import { setBannerData } from "./store/movieslice";
+import { setBannerData, setImageURL } from "./store/movieSlice";
 
+// Set axios base URL
+axios.defaults.baseURL = "https://api.themoviedb.org/3"; // Example for TMDb API
 
 function App() {
+  const dispatch = useDispatch();
 
-  // const dispatch = useDispatch()
+  const fetchTrendingData = async () => {
+    try {
+      const response = await axios.get("/trending/all/week");
+      dispatch(setBannerData(response?.data?.results));
+      console.log("response data", response?.data?.results)
+    } catch (error) {
+      console.log("Error fetching trending data:", error);
+    }
+  };
 
+  const fetchConfiguration = async () => {
+    try {
+      const response = await axios.get("/configuration");
+      dispatch(setImageURL(response.data.images.secure_base_url + "original"));
+      console.log("response data for configuration", response.data.images.secure_base_url + "original");
+    } catch (error) {
+      console.log("Error fetching configuration:", error);
+    }
+  };
 
-  // const fetchTrendingData = async () => {
-  //   try {
-  //     const response = await axios.get("/trending/all/week");
-  //     // dispatch(setBannerData)
-  //     console.log("respose", response);
-  //   } catch (error) {
-  //     console.log("error", error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchTrendingData();
-  // }, []);
+  useEffect(() => {
+    fetchTrendingData();
+    fetchConfiguration(); // Uncomment this to use the configuration
+  }, []);
 
   return (
     <>
       <main className="pb-14 lg:pb-0">
         <Header />
-        <div className="pt-16 ">
+        <div className="">
           <Outlet />
         </div>
         <Footer />
