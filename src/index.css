@@ -8,5 +8,7 @@ body{
   
   font-family: "Nunito",sans-serif,Arial, Helvetica;
 
+  scroll-behavior: smooth;
   @apply bg-neutral-900 text-neutral-300 
+  
 }
