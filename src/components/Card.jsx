@@ -1,16 +1,17 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
-const Card = ({ data, treding, index }) => {
+const Card = ({ data, trending, index }) => {
   const imageURL = useSelector((state) => state.movieData.imageURL);
 
   return (
-    <div className="w-full min-w-[330px] max-w-[330px] h-full overflow-hidden rounded relative">
+    <Link to={"/"+data.media_type+"/"+data.id} className="w-full min-w-[330px] max-w-[330px] h-full overflow-hidden rounded relative">
       {/* Card
        */}
       <img src={imageURL + data?.poster_path} alt="" />
       <div className="absolute top-5">
-        {treding && (
+        {trending && (
           <div className="py-1 px-4 backdrop-blur-3xl rounded-r-full bg-black/60 overflow-hidden">
             #{index} Trending
           </div>
@@ -23,7 +24,7 @@ const Card = ({ data, treding, index }) => {
             <p className="text-sm  "> Rating : {Number(data?.vote_average).toFixed(1)}</p>
           </div>
         </div>
-    </div>
+    </Link>
   );
 };
 

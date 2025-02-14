@@ -2,11 +2,15 @@ import React, { useRef } from "react";
 import Card from "./Card";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
 
-const HorizontalScrollCard = ({ data = [], heading }) => {
+
+const HorizontalScrollCard = ({ data = [], heading,trending }) => {
   const containerRef = useRef();
 
   const handleNext =()=>{
     containerRef.current.scrollLeft += 300
+  }
+  const handlePrevious =()=>{
+    containerRef.current.scrollLeft -= 300
   }
   return (
     <div>
@@ -19,20 +23,20 @@ const HorizontalScrollCard = ({ data = [], heading }) => {
         <div className=" relative">
           <div
             ref={containerRef}
-            className="grid grid-cols-[repeat(auto-fit,330px)] grid-flow-col gap-6 mx-auto overflow-hidden relative z-10 overflow-x-scroll scroll-smooth transition-all"
+            className="grid grid-cols-[repeat(auto-fit,330px)] grid-flow-col gap-6 mx-auto overflow-hidden relative z-10 overflow-x-scroll scroll-smooth transition-all scrollbar-none"
           >
             {data.map((data, index) => (
               <Card
                 key={data.id + "heading" + index}
                 data={data}
                 index={index + 1}
-                treding={true}
+                trending={trending}
               />
             ))}
           </div>
 
-          <div className="absolute top-0 items-center h-full flex justify-between w-full">
-            <button className="bg-white text-black rounded-full p-1 z-10 -ml-2"><FaAngleLeft/></button>
+          <div className="absolute top-0 hidden lg:flex  items-center h-full justify-between w-full">
+            <button className="bg-white text-black rounded-full p-1 z-10 -ml-2" onClick={handlePrevious}><FaAngleLeft/></button>
             <button className="bg-white text-black rounded-full p-1 z-10 -mr-2" onClick={handleNext}><FaAngleRight/></button>
           </div>
         </div>
