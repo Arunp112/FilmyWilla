@@ -18,6 +18,7 @@ const Header = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+
   return (
     <header className="fixed top-0 w-full h-16 bg-black bg-opacity-50 z-40">
       <div className="container mx-auto px-2 flex items-center h-full">
@@ -30,9 +31,8 @@ const Header = () => {
         </div>
         <nav className="hidden lg:flex items-center gap-4 ml-6">
           {navigation.map((nav, index) => (
-            <div>
+            <div key={index}> {/* Add key here to the parent div */}
               <NavLink
-                key={nav.label}
                 to={nav.href}
                 className={({ isActive }) =>
                   `px-2 hover:text-neutral-100 ${
@@ -58,8 +58,6 @@ const Header = () => {
               <IoMdSearch />
             </button>
           </form>
-          {/* <div >
-                </div> */}
           <div className="cursor-pointer active:scale-50 transition-all">
             <FaRegUserCircle className="text-white text-2xl hover:text-neutral-300 " />
           </div>

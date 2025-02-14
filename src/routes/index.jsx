@@ -21,11 +21,11 @@ const router = createBrowserRouter([
                 element:<ExplorePage/>
             },
             {
-                path:":detail:/id",
+                path:":detail/:id",
                 element:<DetailPage/>
             },
             {
-                path:"/search",
+                path:"search",
                 element:<SearchPage/>
             },
         ]
