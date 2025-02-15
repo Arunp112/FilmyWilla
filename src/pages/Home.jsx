@@ -33,10 +33,10 @@ const Home = () => {
     <div>
       <BannerHome />
       <HorizontalScrollCard data={treadingMovie} heading={"Trending"} trending={true}/>
-      <HorizontalScrollCard data={nowPlayingData} heading={"Nowing Playing"}/>
-      <HorizontalScrollCard data={topRatedData } heading={"Top Rated Movies"}/>
-      <HorizontalScrollCard data={popularTvShow } heading={"Popular Tv show"}/>
-      <HorizontalScrollCard data={onTheAirShowData } heading={"On the air show"}/>
+      <HorizontalScrollCard data={nowPlayingData} heading={"Nowing Playing"} media_type={"movie"}/>
+      <HorizontalScrollCard data={topRatedData } heading={"Top Rated Movies"} media_type={" movie"}/>
+      <HorizontalScrollCard data={popularTvShow } heading={"Popular Tv show"} media_type={"tv"}/>
+      <HorizontalScrollCard data={onTheAirShowData } heading={"On the air show"} media_type={"tv"}/>
 
       
     </div>

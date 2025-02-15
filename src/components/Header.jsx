@@ -4,10 +4,14 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { IoMdSearch } from "react-icons/io";
 // import { Navigate } from "react-router-dom";
 import { navigation } from "../constants/navigation";
+import { useLocation } from "react-router-dom";
 
 const Header = () => {
-  const [searchInput, setSearchInput] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+  const removeSpace = location?.search?.slice(3)?.split('%20')?.join(" ")
+  const [searchInput, setSearchInput] = useState(removeSpace);
+  console.log('removespace',removeSpace)
 
   useEffect(() => {
     if (searchInput) {
