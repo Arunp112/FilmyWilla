@@ -2,16 +2,15 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate, Link } from "react-router-dom";
 import { FaRegUserCircle } from "react-icons/fa";
 import { IoMdSearch } from "react-icons/io";
-// import { Navigate } from "react-router-dom";
 import { navigation } from "../constants/navigation";
 import { useLocation } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const removeSpace = location?.search?.slice(3)?.split('%20')?.join(" ")
+  const removeSpace = location?.search?.slice(3)?.split("%20")?.join(" ");
   const [searchInput, setSearchInput] = useState(removeSpace);
-  console.log('removespace',removeSpace)
+  
 
   useEffect(() => {
     if (searchInput) {
@@ -35,7 +34,9 @@ const Header = () => {
         </div>
         <nav className="hidden lg:flex items-center gap-4 ml-6">
           {navigation.map((nav, index) => (
-            <div key={index}> {/* Add key here to the parent div */}
+            <div key={index}>
+              {" "}
+              {/* Add key here to the parent div */}
               <NavLink
                 to={nav.href}
                 className={({ isActive }) =>

@@ -5,31 +5,29 @@ import ExplorePage from "../pages/ExplorePage";
 import DetailPage from "../pages/DetailPage";
 import SearchPage from "../pages/SearchPage";
 
-
-
 const router = createBrowserRouter([
-    {
-        path : "/",
-        element: <App />,
-        children: [
-            {
-                path:"",
-                element: <Home/>
-            },
-            {
-                path:":explore",
-                element:<ExplorePage/>
-            },
-            {
-                path:":detail/:id",
-                element:<DetailPage/>
-            },
-            {
-                path:"search",
-                element:<SearchPage/>
-            },
-        ]
-    }
-])
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        path: "",
+        element: <Home />,
+      },
+      {
+        path: ":explore",
+        element: <ExplorePage />,
+      },
+      {
+        path: ":detail/:id",
+        element: <DetailPage />,
+      },
+      {
+        path: "search",
+        element: <SearchPage />,
+      },
+    ],
+  },
+]);
 
-export default router
+export default router;

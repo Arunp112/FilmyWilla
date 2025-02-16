@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Divider from "../components/Divider";
 
+import PlayVideo from "../components/PlayVideo";
+
 const DetailPage = () => {
   const params = useParams();
   const imageURL = useSelector((state) => state.movieData.imageURL);
@@ -12,17 +14,21 @@ const DetailPage = () => {
   const { data: castData } = useFetchDetail(
     `/${params.detail}/${params.id}/credits`
   );
-  console.log("params", data);
-  const duration = (Number(data?.runtime) / 60).toFixed(1).split(".");
 
-  const writer = castData?.crew
-    ?.filter((ele) => ele?.job === "writer")
-    ?.map((ele) => ele?.name)
-    .join(", ");
-  console.log("writer =", writer);
+  const [playVideo, setPlayVideo] = useState(false);
+  const [playVideoId, setPlayVideoId] = useState("");
+
+  
+ 
+  const duration = (Number(data?.runtime) / 60).toFixed(1).split(".");
+  const handlePlayVideo = (data) => {
+    setPlayVideoId(data);
+    setPlayVideo(true);
+  };
+
   return (
     <div>
-      DetailPage
+      {/* DetailPage */}
       <div className="w-full h-[500px] relative hidden lg:block">
         <div className="w-full h-full">
           <img
@@ -34,15 +40,21 @@ const DetailPage = () => {
         <div className="absolute w-full h-full bg-gradient-to-b from-neutral-900/90 to-transparent top-0"></div>
       </div>
       <div className="container mx-auto px-4 py-16 lg:py-0 flex flex-col justify-center items-center lg:flex-row gap-5 lg:gap-10">
-        <div className="relative  mx-auto  lg:-mt-28 lg:mx-0  w-fit">
+        <div className="relative  mx-auto  lg:-mt-28 lg:mx-0  w-fit min-w-60">
           <img
             src={imageURL + data?.poster_path}
             className="h-80 w-60 object-cover rounded "
             alt=""
           />
+          <button
+            onClick={() => handlePlayVideo(data)}
+            className="mt-3 w-full py-2 px-4 text-center bg-white text-black rounded text-lg font-bold hover:bg-gradient-to-l from-red-500 to-orange-500 hover:scale-105 transition-all"
+          >
+            Play Now{" "}
+          </button>
         </div>
         <div>
-          <h2 className="text-2xl font-bold text-white">
+          <h2 className="text-2xl lg:font-3xl mt-3 font-bold text-white">
             {data?.title || data?.name}
           </h2>
           <p className="text-neutral-400">{data?.tagline}</p>
@@ -79,6 +91,14 @@ const DetailPage = () => {
           </div>
         </div>
       </div>
+      <div></div>
+      {playVideo && (
+        <PlayVideo
+          data={playVideoId}
+          close={() => setPlayVideo(false)}
+          media_type={params.detail}
+        />
+      )}
     </div>
   );
 };

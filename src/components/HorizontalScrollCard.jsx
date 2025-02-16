@@ -2,21 +2,20 @@ import React, { useRef } from "react";
 import Card from "./Card";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
 
-
-const HorizontalScrollCard = ({ data = [], heading,trending ,media_type}) => {
+const HorizontalScrollCard = ({ data = [], heading, trending, media_type }) => {
   const containerRef = useRef();
 
-  const handleNext =()=>{
-    containerRef.current.scrollLeft += 300
-  }
-  const handlePrevious =()=>{
-    containerRef.current.scrollLeft -= 300
-  }
+  const handleNext = () => {
+    containerRef.current.scrollLeft += 300;
+  };
+  const handlePrevious = () => {
+    containerRef.current.scrollLeft -= 300;
+  };
   return (
     <div>
       {/* HorizontalScrollCard */}
       <div className="container mx-auto px-3 my-10">
-        <h2 className="text-xl  lg:text-2xl font-bold mb-2 text-white">
+        <h2 className="text-xl  lg:text-2xl font-bold mb-2 text-white capitalize">
           {heading}
         </h2>
 
@@ -33,13 +32,22 @@ const HorizontalScrollCard = ({ data = [], heading,trending ,media_type}) => {
                 trending={trending}
                 media_type={media_type}
               />
-
             ))}
           </div>
 
           <div className="absolute top-0 hidden lg:flex  items-center h-full justify-between w-full">
-            <button className="bg-white text-black rounded-full p-1 z-10 -ml-2" onClick={handlePrevious}><FaAngleLeft/></button>
-            <button className="bg-white text-black rounded-full p-1 z-10 -mr-2" onClick={handleNext}><FaAngleRight/></button>
+            <button
+              className="bg-white text-black rounded-full p-1 z-10 -ml-2"
+              onClick={handlePrevious}
+            >
+              <FaAngleLeft />
+            </button>
+            <button
+              className="bg-white text-black rounded-full p-1 z-10 -mr-2"
+              onClick={handleNext}
+            >
+              <FaAngleRight />
+            </button>
           </div>
         </div>
       </div>

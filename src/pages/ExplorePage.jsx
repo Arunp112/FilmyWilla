@@ -18,12 +18,14 @@ const ExplorePage = () => {
       });
 
       // Append new data to the previous data (infinite scroll)
+
+
       setData((prev) => {
         return [...prev, ...response.data.results];
       });
       setTotalPageNo(response.data.total_pages);
 
-      console.log("explore data info ", data);
+      
     } catch (error) {
       console.log("error", error);
     }

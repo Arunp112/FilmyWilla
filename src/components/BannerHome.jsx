@@ -5,45 +5,41 @@ import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
 const BannerHome = () => {
   const bannerData = useSelector((state) => state.movieData.bannerData);
   const imageURL = useSelector((state) => state.movieData.imageURL);
-//   console.log("bannerData ",bannaerData)
-//   console.log("image data  ",imageURL)
 
-const [currentImage,setCurrentImage] = useState(0)
+  const [currentImage, setCurrentImage] = useState(0);
 
   const handlePrevious = () => {
-    if(currentImage >0){
-        setCurrentImage(prev=>prev-1)   
+    if (currentImage > 0) {
+      setCurrentImage((prev) => prev - 1);
     }
   };
   const handleNext = () => {
-    if(currentImage < bannerData.length -1){
-        setCurrentImage(prev=>prev+1)   
+    if (currentImage < bannerData.length - 1) {
+      setCurrentImage((prev) => prev + 1);
     }
-
-
   };
 
-
-  useEffect(()=>{
+  useEffect(() => {
     const interval = setInterval(() => {
-        if (currentImage < bannerData.length -1 ) {
-            handleNext()
-        }else{
-            setCurrentImage(0)
-        }
+      if (currentImage < bannerData.length - 1) {
+        handleNext();
+      } else {
+        setCurrentImage(0);
+      }
     }, 5000);
-    return ()=>clearInterval(interval)
-  },[bannerData,imageURL])
+    return () => clearInterval(interval);
+  }, [bannerData, imageURL, currentImage]);
 
   return (
-    // <div></div>
+   
     <section className="w-full h-full">
       {/* BannerHome */}
       <div className="flex min-h-full max-h-[95vh] overflow-hidden">
         {bannerData.map((data, index) => (
           <div
             key={data.id}
-            className="min-w-full min-h-[450px] lg:min-h-full overflow-hidden relative group transition-all" style={{transform: `translateX(-${currentImage * 100}%) `}}
+            className="min-w-full min-h-[450px] lg:min-h-full overflow-hidden relative group transition-all"
+            style={{ transform: `translateX(-${currentImage * 100}%) ` }}
           >
             <div className="w-full h-full">
               <img
@@ -55,10 +51,16 @@ const [currentImage,setCurrentImage] = useState(0)
             {/** button for next and previous image  */}
 
             <div className="absolute top-0 w-full h-full hidden items-center justify-between px-4 group-hover:lg:flex">
-              <button className="bg-white p-1 rounded-full  text-xl z-10  text-black" onClick={handlePrevious}>
+              <button
+                className="bg-white p-1 rounded-full  text-xl z-10  text-black"
+                onClick={handlePrevious}
+              >
                 <FaAngleLeft />
               </button>
-              <button className="bg-white p-1 rounded-full  text-xl z-10  text-black" onClick={handleNext}>
+              <button
+                className="bg-white p-1 rounded-full  text-xl z-10  text-black"
+                onClick={handleNext}
+              >
                 <FaAngleRight />
               </button>
             </div>

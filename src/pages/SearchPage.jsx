@@ -7,11 +7,11 @@ import { useNavigate } from "react-router-dom";
 
 const SearchPage = () => {
   const location = useLocation();
-  const navigate = useNavigate()
-  const params = useParams()
+  const navigate = useNavigate();
+  const params = useParams();
   const [data, setData] = useState([]);
-  const [page, setPage]=useState()
-
+  const [page, setPage] = useState();
+  const query = location?.search?.slice(3);
   const fetchData = async () => {
     try {
       const response = await axios.get(`/search/multi`, {
@@ -23,41 +23,46 @@ const SearchPage = () => {
       setData((prev) => {
         return [...prev, ...response.data.results];
       });
-      console.log("data ",response.data )
     } catch (error) {
       console.log("error", error);
     }
   };
 
-useEffect(()=>{
-  setPage(1)
-  setData([])
-  fetchData()
-},[location.search])
-
-const handleScroll = () => {
-  if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-    if (pageNo < totalPageNo) {
-      setPage((prev) => prev + 1);
+  useEffect(() => {
+    if (query) {
+      setPage(1);
+      setData([]);
+      fetchData();
     }
-  }
-};
+  }, [location.search]);
 
- useEffect(() => {
-    fetchData();
+  const handleScroll = () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+      if (pageNo < totalPageNo) {
+        setPage((prev) => prev + 1);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (query) {
+      fetchData();
+    }
   }, [page]);
 
-useEffect(()=>{
-  window.addEventListener('scroll',handleScroll)
-})
-  console.log("location",location.search.slice(3))
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+  });
+
   return (
     <div className="py-16">
       <div className="lg:hidden my-2 mx-1 sticky top-[70px] z-30">
-        <input type="text"
-        placeholder="Search here"
-        onChange={(e)=>navigate(`/search?q=${e.target.value}`)}
-        className=" px-4 py-1 text-lg w-full bg-white text-neutral-900 rounded-full"
+        <input
+          type="text"
+          placeholder="Search here"
+          onChange={(e) => navigate(`/search?q=${e.target.value}`)}
+          value={query?.split("%20").join(" ")}
+          className=" px-4 py-1 text-lg w-full bg-white text-neutral-900 rounded-full"
         />
       </div>
       <div className="container mx-auto">
