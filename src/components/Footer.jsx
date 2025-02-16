@@ -12,7 +12,7 @@ const Footer = () => {
         <Link to={"/"}>Contact</Link>
       </div>
       <p>
-        Create With TMDB API 
+        Create With Arun pal
         {/* <span className="absolute flex justify-center items-center">
           <FaHeart />
         </span> */}
