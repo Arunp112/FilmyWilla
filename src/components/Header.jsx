@@ -27,7 +27,7 @@ const Header = () => {
       <div className="container mx-auto px-2 flex items-center h-full">
         <div className="font-bold text-lg">
           <Link to={"/"}>
-            <span className="text-orange-600">
+            <span className="text-orange-600 font-serif">
               Filmy<span className="text-blue-600">Willa</span>
             </span>
           </Link>
